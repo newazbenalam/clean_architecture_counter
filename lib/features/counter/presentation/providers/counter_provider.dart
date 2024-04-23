@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 class CounterProvider extends ChangeNotifier {
   final GetCounterUseCase getCounterUseCase;
 
-  CounterProvider({required this.getCounterUseCase});
+  CounterProvider(this.getCounterUseCase);
 
   CounterModel _counterModel = CounterModel(count: 0);
   CounterModel get counterModel => _counterModel;
@@ -13,6 +13,7 @@ class CounterProvider extends ChangeNotifier {
   Future<void> fetchCounter() async {
     final count = getCounterUseCase.execute();
     _counterModel = CounterModel(count: count.count);
+    debugPrint("Fetching!${_counterModel.count}");
     notifyListeners();
   }
 
